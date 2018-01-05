@@ -217,7 +217,7 @@ class Backend {
     .then(this.entryWithFormat(collection, slug));
   }
 
-  persistEntry(config, collection, entryDraft, MediaFiles, integrations, options = {}) {
+  persistEntry(config, collection, entryDraft, integrations, options = {}) {
     const newEntry = entryDraft.getIn(["entry", "newRecord"]) || false;
 
     const parsedData = {
@@ -262,7 +262,7 @@ class Backend {
     const updatedOptions = { ...options, hasAssetStore };
     const opts = { newEntry, parsedData, commitMessage, collectionName, mode, ...updatedOptions };
 
-    return this.implementation.persistEntry(entryObj, MediaFiles, opts)
+    return this.implementation.persistEntry(entryObj, opts)
       .then(() => entryObj.slug);
   }
 
